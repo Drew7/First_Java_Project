@@ -15,19 +15,20 @@ public class HelloWorld {
 		Date currentDate = checkDay.getInstance().getTime();
 		checkDay.setTime(currentDate);
 		
-        int years = calcYears(birthDay, checkDay);
-        int months = calcMonthes(birthDay, checkDay);
+		int checkMonth = checkDay.get(GregorianCalendar.MONTH); 
+        int birthMonth = birthDay.get(GregorianCalendar.MONTH);
+        
+        int years = calcYears(birthDay, checkDay, birthMonth, checkMonth);
+        int months = calcMonthes(birthDay, checkDay, birthMonth, checkMonth);
         int days = calcDays(birthDay, checkDay);
         
 		System.out.println("My daughter is " + years + " years "  + months + " months " + days + " days ");
 		
 	
 	}
-	private static int calcYears(GregorianCalendar birthDay, GregorianCalendar checkDay) { 
+	private static int calcYears(GregorianCalendar birthDay, GregorianCalendar checkDay, int birthMonth, int checkMonth) { 
         int years = checkDay.get(GregorianCalendar.YEAR) - birthDay.get(GregorianCalendar.YEAR); 
-       
-        int checkMonth = checkDay.get(GregorianCalendar.MONTH); 
-        int birthMonth = birthDay.get(GregorianCalendar.MONTH); 
+             
         if ( checkMonth < birthMonth ) { 
             years --; 
         } else  if (checkMonth == birthMonth 
@@ -37,13 +38,19 @@ public class HelloWorld {
         } 
         return years; 
     } 
-	private static int calcMonthes(GregorianCalendar birthDay, GregorianCalendar checkDay) { 
-    	int months = checkDay.get(GregorianCalendar.MONTH) - birthDay.get(GregorianCalendar.MONTH);
-    	return months;
+	private static int calcMonthes(GregorianCalendar birthDay, GregorianCalendar checkDay, int birthMonth, int checkMonth) { 
+    	
+        int months;
+		if (checkMonth < birthMonth){
+			months = checkMonth;
+		} else {
+			months = checkMonth - birthMonth;
+		};
+		return months;
     }
     
     private static int calcDays(GregorianCalendar birthDay, GregorianCalendar checkDay) { 
-    	int days = checkDay.get(GregorianCalendar.DATE) - birthDay.get(GregorianCalendar.DATE);
+    	int days = checkDay.get(GregorianCalendar.DAY_OF_YEAR) - birthDay.get(GregorianCalendar.DAY_OF_YEAR);
     	return days;
     }
 }
