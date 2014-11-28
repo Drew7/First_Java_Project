@@ -14,7 +14,7 @@ public class HelloWorld {
 		
 		GregorianCalendar birthDay = new GregorianCalendar(2012,07,20);
 		GregorianCalendar checkDay = new GregorianCalendar();
-		Date currentDate = checkDay.getInstance().getTime();
+		Date currentDate = GregorianCalendar.getInstance().getTime();
 		checkDay.setTime(currentDate);
 		
 		int checkMonth = checkDay.get(GregorianCalendar.MONTH); 
